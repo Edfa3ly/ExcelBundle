@@ -51,37 +51,37 @@ I encourage you to use the built-in function for csv: http://php.net/manual-look
 - Create an empty object:
 
 ``` php
-$phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+$phpExcelObject = $this->get('Liuggio\ExcelBundle\Factory')->createPHPExcelObject();
 ```
 
 - Create an object from a file:
 
 ``` php
-$phpExcelObject = $this->get('phpexcel')->createPHPExcelObject('file.xls');
+$phpExcelObject = $this->get('Liuggio\ExcelBundle\Factory')->createPHPExcelObject('file.xls');
 ```
 
 - Create a Excel5 and write to a file given the object:
 
 ```php
-$writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+$writer = $this->get('Liuggio\ExcelBundle\Factory')->createWriter($phpExcelObject, 'Excel5');
 $writer->save('file.xls');
 ```
 
 - Create a Excel5 and create a StreamedResponse:
 
 ```php
-$writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
-$response = $this->get('phpexcel')->createStreamedResponse($writer);
+$writer = $this->get('Liuggio\ExcelBundle\Factory')->createWriter($phpExcelObject, 'Excel5');
+$response = $this->get('Liuggio\ExcelBundle\Factory')->createStreamedResponse($writer);
 ```
 
 - Create a Excel file with an image:
 
 ```php
-$writer = $this->get('phpexcel')->createPHPExcelObject();
+$writer = $this->get('Liuggio\ExcelBundle\Factory')->createPHPExcelObject();
 $writer->setActiveSheetIndex(0);
 $activesheet = $writer->getActiveSheet();
 
-$drawingobject = $this->get('phpexcel')->createPHPExcelWorksheetDrawing();
+$drawingobject = $this->get('Liuggio\ExcelBundle\Factory')->createPHPExcelWorksheetDrawing();
 $drawingobject->setName('Image name');
 $drawingobject->setDescription('Image description');
 $drawingobject->setPath('/path/to/image');
@@ -128,7 +128,7 @@ class DefaultController extends Controller
     public function indexAction($name)
     {
         // ask the service for a Excel5
-       $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+       $phpExcelObject = $this->get('Liuggio\ExcelBundle\Factory')->createPHPExcelObject();
 
        $phpExcelObject->getProperties()->setCreator("liuggio")
            ->setLastModifiedBy("Giulio De Donato")
@@ -145,9 +145,9 @@ class DefaultController extends Controller
        $phpExcelObject->setActiveSheetIndex(0);
 
         // create the writer
-        $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+        $writer = $this->get('Liuggio\ExcelBundle\Factory')->createWriter($phpExcelObject, 'Excel5');
         // create the response
-        $response = $this->get('phpexcel')->createStreamedResponse($writer);
+        $response = $this->get('Liuggio\ExcelBundle\Factory')->createStreamedResponse($writer);
         // adding headers
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
